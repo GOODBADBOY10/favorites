@@ -1,0 +1,31 @@
+# Anchor
+.anchor
+target/
+**/*.rs.bk
+test-ledger/
+
+# Solana
+*.so
+*.tar.bz2
+solana-release-*
+.solana/
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# Keys - CRITICAL!
+*.json
+!programs/**/Cargo.toml
+!Anchor.toml
+!package.json
+!tsconfig.json
+
+# IDL exceptions
+!target/idl/
+!target/types/
+
+# Environment
+.env
+.env.local
