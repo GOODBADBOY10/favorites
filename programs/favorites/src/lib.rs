@@ -21,7 +21,7 @@ pub mod favorites {
     ) -> Result<()> {
         msg!("Greetings from {:?}", context.program_id);
 
-        let user_publick_key = context.accounts.user.key();
+        let user_public_key = context.accounts.user.key();
 
         msg!(
             "User, {}'s favorite number is {}, favorite color is {}, and their hobbies are {:?}",
@@ -59,7 +59,7 @@ pub struct SetFavorites<'info> {
     #[account(
         init_if_needed,
         payer = user,
-        space = ANCHOR_DISCRIMINATOR_SIZE + Favorites::INIT_SPACE,
+        space = ANCHOR_DISCRIMINATOR_SIZE + Favorite::INIT_SPACE,
         seeds = [b"favorites", user.key().as_ref()],
         bump
     )]
