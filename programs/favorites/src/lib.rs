@@ -27,4 +27,21 @@ pub struct Favorite {
 }
 
 #[derive(Accounts)]
+pub struct SetFavorites<'info> {
+    #[account(mut)]
+    pub user: Signer<'info>,
+
+    #[account(
+        init_if_needed,
+        payer = user,
+        space = ANCHOR_DISCRIMINATOR_SIZE + Favorites::INIT_SPACE,
+        seeds = [b"favorites", user.key().as_ref()],
+        bump
+    )]
+    pub favorites: Account<'info, Favorite>,
+
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
 pub struct Initialize {}
