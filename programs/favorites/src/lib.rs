@@ -13,7 +13,32 @@ pub mod favorites {
         Ok(())
     }
 
-    pub fn set_favorites() -> Result<()> {}
+    pub fn set_favorites(
+        context: Context<SetFavorites>,
+        number: u64,
+        color: String,
+        hobbies: Vec<String>,
+    ) -> Result<()> {
+        msg!("Greetings from {:?}", context.program_id);
+
+        let user_publick_key = context.accounts.user.key();
+
+        msg!(
+            "User, {}'s favorite number is {}, favorite color is {}, and their hobbies are {:?}",
+            user_public_key,
+            number,
+            color,
+            hobbies
+        );
+
+        context.accounts.favorites.set_inner(Favorite {
+            number,
+            color,
+            hobbies,
+        });
+
+        Ok(())
+    }
 }
 
 #[account]
